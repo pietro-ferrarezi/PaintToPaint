@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint2Paint</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5%;
+        }
+        h1 {
+            font-size: xxx-large;
+        }
+        .blockAction {
+            box-shadow: 0.3px 0.3px 2px black;
+            width: fit-content;
+            padding: 5px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+        .actions {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .containerCanvas {
+            position: relative;
+        }
+        img {
+            width: 18px;
+            height: auto;
+            pointer-events: none;
+        }
+        .activeTool {
+            background-color: white;
+            border: 0.5px solid black;
+            padding: 2px 2px 0 2px;
+        }
+        label {
+            margin-right: 3px;
+        }
+        button {
+            padding: 2px 2px 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paint to Paint</h1>
+    <div class="display">
+        <div class="actions">
+            <div class="blockAction">
+                <label for="glow">Glow Mode</label>
+                <input type="checkbox" name="glow" id="glow">
+            </div>
+            <div class="blockAction">
+                <label for="color">Color</label>
+                <input type="color" name="color" id="color">
+            </div>
+            <div class="blockAction">
+                <button id="clean">Clean</button>
+            </div>
+            <div class="blockAction">
+                <label for="range">Brush stroke</label>
+                <input type="range" name="stroke" id="stroke" min="5" max="80" step="1">
+            </div>
+            <div class="blockAction">
+                <label for="shape">Brush shape</label>
+                <button name="shape" id="square"><img src="./icons/square_shape.png" alt="square"></button>
+                <button name="shape" id="circle"><img src="./icons/circle_shape.png" alt="circle"></button>
+            </div>
+            <div class="blockAction">
+                <label for="tool">Tool</label>
+                <button name="tool" id="brush" class="activeTool"><img src="./icons/brush.png" alt="brush"></button>
+                <button name="tool" id="eraser"><img src="./icons/eraser.png" alt="eraser"></button>
+                <button name="tool" id="bucket"><img src="./icons/bucket.png" alt="bucket"></button>
+            </div>
+        </div>
+
+        <div class="containerCanvas">
+            <canvas class="canvasDrawing" width="900px" height="400px" style="background-color: white;"></canvas>
+            <canvas class="canvasCursor" width="900px" height="400px" style="border: 1px solid black; position:absolute; top: 0; left: 0; pointer-events:none; background-color: transparent;"></canvas>
+        </div>
+
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
