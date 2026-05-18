@@ -1,7 +1,3 @@
-// Falta:
-// Ferramenta de borracha
-// Ferramenta balde de tinta
-
 let modes = ["default", "glow"];
 let shapes = ["square", "circle"];
 let tools = ["brush", "eraser", "bucket"];
