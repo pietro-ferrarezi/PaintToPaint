@@ -381,10 +381,12 @@ function RGBArrayToCSSString(color) {
   return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
 }
 
-function isSameColor(origin, color) {
-  return (
-    origin[0] === color[0] && origin[1] === color[1] && origin[2] === color[2]
-  );
+function isSameColor(origin, color, tolerance = 20) {
+  const rDiff = Math.abs(origin[0] - color[0]);
+  const gDiff = Math.abs(origin[1] - color[1]);
+  const bDiff = Math.abs(origin[2] - color[2]);
+
+  return rDiff <= tolerance && gDiff <= tolerance && bDiff <= tolerance;
 }
 
 window.onload = clean(canvasDrawing);
