@@ -111,7 +111,7 @@ document.getElementById("stroke").addEventListener("input", (e) => {
     canvasCursor.width / 2 - stroke / 2,
     canvasCursor.height / 2 - stroke / 2,
   );
-  draw(ctxC, brush, "red");
+  draw(ctxC, brush, "#FF0000");
 });
 
 document.getElementById("square").addEventListener("click", (e) => {
