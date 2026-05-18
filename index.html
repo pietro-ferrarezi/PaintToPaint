@@ -24,6 +24,13 @@
         h1 {
             font-size: xxx-large;
         }
+        .display {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         .blockAction {
             box-shadow: 0.3px 0.3px 2px black;
             width: fit-content;
@@ -36,10 +43,12 @@
         }
         .actions {
             width: 100%;
+            height: fit-content;
             margin-bottom: 10px;
             display: flex;
             flex-direction: row;
             justify-content: center;
+            flex-wrap: wrap;
         }
         .containerCanvas {
             position: relative;
@@ -49,7 +58,7 @@
             height: auto;
             pointer-events: none;
         }
-        .activeTool {
+        .active {
             background-color: white;
             border: 0.5px solid black;
             padding: 2px 2px 0 2px;
@@ -83,14 +92,20 @@
             </div>
             <div class="blockAction">
                 <label for="shape">Brush shape</label>
-                <button name="shape" id="square"><img src="./icons/square_shape.png" alt="square"></button>
+                <button name="shape" id="square" class="active"><img src="./icons/square_shape.png" alt="square"></button>
                 <button name="shape" id="circle"><img src="./icons/circle_shape.png" alt="circle"></button>
             </div>
             <div class="blockAction">
                 <label for="tool">Tool</label>
-                <button name="tool" id="brush" class="activeTool"><img src="./icons/brush.png" alt="brush"></button>
+                <button name="tool" id="brush" class="active"><img src="./icons/brush.png" alt="brush"></button>
                 <button name="tool" id="eraser"><img src="./icons/eraser.png" alt="eraser"></button>
                 <button name="tool" id="bucket"><img src="./icons/bucket.png" alt="bucket"></button>
+            </div>
+            <div class="blockAction">
+                <label for="file">File</label>
+                <button name="file" id="download"><img src="./icons/download.png" alt="download"></button>
+                <button name="file" id="upload"><img src="./icons/upload.png" alt="upload"></button>
+                <input type="file" id="fileInput" accept="image/png" hidden>
             </div>
         </div>
 

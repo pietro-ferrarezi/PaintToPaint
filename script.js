@@ -52,7 +52,7 @@ const colors = [
 let isPainting = false;
 
 let stroke = 20;
-let shape = shapes[1];
+let shape = shapes[0];
 let tool = tools[0];
 
 class Brush {
@@ -114,31 +114,62 @@ document.getElementById("stroke").addEventListener("input", (e) => {
   draw(ctxC, brush, "red");
 });
 
-document.getElementById("square").addEventListener("click", () => {
+document.getElementById("square").addEventListener("click", (e) => {
   shape = shapes[0];
+  e.currentTarget.classList.add("active");
+  document.getElementById("circle").classList.remove("active");
 });
-document.getElementById("circle").addEventListener("click", () => {
+document.getElementById("circle").addEventListener("click", (e) => {
   shape = shapes[1];
+  e.currentTarget.classList.add("active");
+  document.getElementById("square").classList.remove("active");
 });
 
 document.getElementById("brush").addEventListener("click", (e) => {
   tool = tools[0];
-  e.currentTarget.classList.add("activeTool");
-  document.getElementById("eraser").classList.remove("activeTool");
-  document.getElementById("bucket").classList.remove("activeTool");
+  e.currentTarget.classList.add("active");
+  document.getElementById("eraser").classList.remove("active");
+  document.getElementById("bucket").classList.remove("active");
 });
 document.getElementById("eraser").addEventListener("click", (e) => {
   tool = tools[1];
-  e.currentTarget.classList.add("activeTool");
-  document.getElementById("brush").classList.remove("activeTool");
-  document.getElementById("bucket").classList.remove("activeTool");
+  e.currentTarget.classList.add("active");
+  document.getElementById("brush").classList.remove("active");
+  document.getElementById("bucket").classList.remove("active");
 });
 document.getElementById("bucket").addEventListener("click", (e) => {
   tool = tools[2];
-  e.currentTarget.classList.add("activeTool");
-  document.getElementById("eraser").classList.remove("activeTool");
-  document.getElementById("brush").classList.remove("activeTool");
+  e.currentTarget.classList.add("active");
+  document.getElementById("eraser").classList.remove("active");
+  document.getElementById("brush").classList.remove("active");
 });
+
+document.getElementById("download").addEventListener("click", () => {
+  const link = document.createElement("a");
+  let fileName = prompt("What's the file name?")
+  link.download = `${fileName.trim().replace(" ", "_")}.png`;
+  link.href = canvasDrawing.toDataURL("image/png");
+  link.click();
+});
+
+const fileInput = document.getElementById("fileInput")
+document.getElementById("upload").addEventListener("click", (e) => {
+  fileInput.click()
+})
+fileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0]
+
+  if(!file) return
+
+  const img = new Image()
+
+  img.onload = () => {
+    ctxD.clearRect(0, 0, canvasDrawing.width, canvasDrawing.height)
+    ctxD.drawImage(img, 0, 0, canvasDrawing.width, canvasDrawing.height)
+  }
+
+  img.src = URL.createObjectURL(file)
+})
 
 function getMousePos(canvas, event) {
   const rect = canvas.getBoundingClientRect();
@@ -236,11 +267,11 @@ function drawLine(canvasCtx, from, to, brush, color) {
 
 function erase(canvasCtx, from, to, brush) {
   canvasCtx.save();
-  canvasCtx.globalCompositeOperation = "destination-out";
+  // canvasCtx.globalCompositeOperation = "destination-out";
   canvasCtx.beginPath();
   canvasCtx.lineWidth = brush.stroke;
   canvasCtx.lineCap = brush.shape === shapes[1] ? "round" : "square";
-  canvasCtx.strokeStyle = "rgba(0,0,0,1)";
+  canvasCtx.strokeStyle = nowMode === modes[0] ? "white" : "black";
   canvasCtx.moveTo(from.x, from.y);
   canvasCtx.lineTo(to.x, to.y);
   canvasCtx.stroke();
