@@ -29,7 +29,7 @@ Um editor de desenho inspirado em programas clássicos de paint, desenvolvido co
 Clone o repositório:
 
 ```bash
-git clone https://github.com//seu-repositorio.git
+git clone https://github.com/pietro-ferrarezi/PaintToPaint.git
 ```
 
 Abra o arquivo:
